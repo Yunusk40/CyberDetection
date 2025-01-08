@@ -1,6 +1,6 @@
-from src.utils import get_data
-from src.train_models import train_and_save_models
-from src.evaluate_models import evaluate_models
+from src.utils.utils import get_data
+from src.binary.train_models import train_and_save_models
+from src.binary.evaluate_models import evaluate_models
 
 
 def main():
