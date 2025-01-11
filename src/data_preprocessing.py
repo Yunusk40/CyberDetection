@@ -2,7 +2,6 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
-
 def load_and_preprocess_data(train_path):
     # Load the full dataset (train and pseudo-test)
     data = pd.read_csv(train_path)

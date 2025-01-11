@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 
 def evaluate_models_binary(X_test, y_test):
-    models = ['Random Forest', 'SVM', 'KNN', 'Decision Tree', 'Logistic Regression', 'Naive Bayes']
+    models = ['Random Forest', 'KNN', 'Decision Tree', 'Logistic Regression', 'Naive Bayes']
     accuracy = []
     precision = []
     recall = []
@@ -25,7 +25,6 @@ def evaluate_models_binary(X_test, y_test):
     # Evaluate each model
     metrics = [
         ('Random Forest', 'models/random_forest_model.pkl'),
-        ('SVM', 'models/svm_model.pkl'),
         ('KNN', 'models/knn_model.pkl'),
         ('Decision Tree', 'models/decision_tree_model.pkl'),
         ('Logistic Regression', 'models/logistic_regression_model.pkl'),

@@ -1,25 +1,21 @@
 import joblib
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import GaussianNB
 
+
+
 def train_and_save_model_multiclass(X_train, y_train):
+    print(f"y_train shape: {y_train.shape}")  # Debugging to ensure it has the shape (num_samples, num_classes)
+
     # Random Forest
     print("Training Random Forest...")
     rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
     rf_model.fit(X_train, y_train)
     joblib.dump(rf_model, 'models/random_forest_model.pkl')
     print("Random Forest trained successfully.")
-
-    # Support Vector Machine
-    print("Training SVM...")
-    svm_model = SVC(kernel='linear', random_state=42)
-    svm_model.fit(X_train, y_train)
-    joblib.dump(svm_model, 'models/svm_model.pkl')
-    print("SVM trained successfully.")
 
     # K-Nearest Neighbors
     print("Training KNN...")

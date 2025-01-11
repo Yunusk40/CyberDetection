@@ -15,13 +15,6 @@ def train_and_save_models_binary(X_train, y_train):
     joblib.dump(rf_model, 'models/random_forest_model.pkl')
     print("Random Forest trained successfully.")
 
-    # Support Vector Machine
-    print("Training SVM...")
-    svm_model = SVC(kernel='linear', random_state=42)
-    svm_model.fit(X_train, y_train)
-    joblib.dump(svm_model, 'models/svm_model.pkl')
-    print("SVM trained successfully.")
-
     # K-Nearest Neighbors
     print("Training KNN...")
     knn_model = KNeighborsClassifier(n_neighbors=5)
