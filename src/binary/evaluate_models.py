@@ -2,6 +2,7 @@ import joblib
 import pandas as pd
 from sklearn.metrics import accuracy_score, f1_score, recall_score, precision_score
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 def evaluate_models_binary(X_test, y_test):
@@ -33,10 +34,10 @@ def evaluate_models_binary(X_test, y_test):
 
     for name, path in metrics:
         acc, prec, rec, f1 = evaluate_model(name, path)
-        accuracy.append(acc)
-        precision.append(prec)
-        recall.append(rec)
-        f1_scores.append(f1)
+        accuracy.append(acc * 100)  # Convert to percentage
+        precision.append(prec * 100)
+        recall.append(rec * 100)
+        f1_scores.append(f1 * 100)
 
     # Save results
     predictions_df = pd.DataFrame({
@@ -52,17 +53,29 @@ def evaluate_models_binary(X_test, y_test):
     # Plot the metrics
     plt.figure(figsize=(12, 6))
     bar_width = 0.2
-    index = range(len(models))
+    index = np.arange(len(models))
 
-    plt.bar(index, accuracy, bar_width, label='Accuracy', color='blue')
-    plt.bar([i + bar_width for i in index], precision, bar_width, label='Precision', color='green')
-    plt.bar([i + 2 * bar_width for i in index], recall, bar_width, label='Recall', color='orange')
-    plt.bar([i + 3 * bar_width for i in index], f1_scores, bar_width, label='F1-Score', color='red')
+    bars1 = plt.bar(index, accuracy, bar_width, label='Accuracy', color='blue')
+    bars2 = plt.bar(index + bar_width, precision, bar_width, label='Precision', color='green')
+    bars3 = plt.bar(index + 2 * bar_width, recall, bar_width, label='Recall', color='orange')
+    bars4 = plt.bar(index + 3 * bar_width, f1_scores, bar_width, label='F1-Score', color='red')
+
+    # Add percentage labels above the bars
+    def add_labels(bars):
+        for bar in bars:
+            height = bar.get_height()
+            plt.text(bar.get_x() + bar.get_width() / 2.0, height, f'{height:.1f}%', ha='center', va='bottom')
+
+    add_labels(bars1)
+    add_labels(bars2)
+    add_labels(bars3)
+    add_labels(bars4)
 
     plt.xlabel('Models')
-    plt.ylabel('Score')
+    plt.ylabel('Score (%)')
     plt.title('Model Performance (Binary Classification)')
-    plt.xticks([i + 1.5 * bar_width for i in index], models, rotation=45)
+    plt.xticks(index + 1.5 * bar_width, models, rotation=45)
     plt.legend()
     plt.tight_layout()
+    plt.savefig('data/output/binary_metrics_comparison.png')
     plt.show()

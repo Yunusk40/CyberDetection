@@ -1,6 +1,7 @@
 import pandas as pd
+import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, LabelEncoder
 
 def load_and_preprocess_data(train_path):
     # Load the full dataset (train and pseudo-test)
@@ -56,3 +57,56 @@ def load_and_preprocess_multiclass_data(dataset_path):
     X_test_scaled = scaler.transform(X_test)
 
     return X_train_scaled, X_test_scaled, y_train, y_test
+
+def load_and_preprocess_webattack_data(file_path):
+    # Load the dataset
+    data = pd.read_csv(file_path)
+
+    # Clean column names
+    data.columns = data.columns.str.strip()
+
+    # Handle missing values
+    if 'Flow Bytes/s' in data.columns:
+        data['Flow Bytes/s'] = data['Flow Bytes/s'].fillna(data['Flow Bytes/s'].median())
+    data.replace([np.inf, -np.inf], np.nan, inplace=True)
+
+    # Only fill missing values for numeric columns
+    numeric_columns = data.select_dtypes(include=[np.number]).columns
+    data[numeric_columns] = data[numeric_columns].fillna(data[numeric_columns].median())
+
+    # Ensure no remaining NaN values
+    if data.isnull().sum().sum() > 0:
+        raise ValueError("Dataset contains NaN values even after cleaning.")
+
+    # Encode the target variable (Label)
+    label_encoder = LabelEncoder()
+    data['Label'] = label_encoder.fit_transform(data['Label'])
+
+    # Split data into features and target
+    X = data.drop(columns=['Label'])
+    y = data['Label']
+
+    # Split into training and testing sets (stratified to preserve class distribution)
+    X_train, X_test, y_train, y_test = train_test_split(
+        X, y, test_size=0.3, random_state=42, stratify=y
+    )
+
+    # Analyze class distribution in the test set
+    print("Class distribution in the test set:")
+    class_distribution = y_test.value_counts()
+    print(class_distribution)
+
+    # Optionally: Convert to percentages for better understanding
+    class_distribution_percent = y_test.value_counts(normalize=True) * 100
+    print("\nClass distribution in percentages:")
+    print(class_distribution_percent)
+
+    # Preprocess training and testing data independently
+    scaler = StandardScaler()
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_test_scaled = scaler.transform(X_test)
+
+    return X_train_scaled, X_test_scaled, y_train, y_test
+
+
+
