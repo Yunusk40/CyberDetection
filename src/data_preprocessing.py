@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 
-def load_and_preprocess_data(train_path):
+def load_and_preprocess_dataset1(train_path):
     # Load the full dataset (train and pseudo-test)
     data = pd.read_csv(train_path)
 
@@ -28,7 +28,7 @@ def load_and_preprocess_data(train_path):
 
     return X_train_scaled, X_test_scaled, y_train, y_test
 
-def load_and_preprocess_multiclass_data(dataset_path):
+def load_and_preprocess_dataset2(dataset_path):
     # Load the full dataset
     data = pd.read_csv(dataset_path)
 
@@ -58,7 +58,7 @@ def load_and_preprocess_multiclass_data(dataset_path):
 
     return X_train_scaled, X_test_scaled, y_train, y_test
 
-def load_and_preprocess_webattack_data(file_path):
+def load_and_preprocess_dataset3(file_path):
     # Load the dataset
     data = pd.read_csv(file_path)
 

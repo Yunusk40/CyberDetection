@@ -1,12 +1,12 @@
 import joblib
+from imblearn.over_sampling import SMOTE
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import GaussianNB
-from imblearn.over_sampling import SMOTE
-import pandas as pd
+from sklearn.neighbors import KNeighborsClassifier
 
+import pandas as pd
+from sklearn.tree import DecisionTreeClassifier
 
 
 def train_and_save_model_multiclass(X_train, y_train):
