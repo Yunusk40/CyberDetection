@@ -5,7 +5,7 @@ Install Required Python libraries:
 pip install -r requirements.txt
 
 Datasets
-To run the project, download and place the following datasets under the data/input/ directory:
+to run the project, download and place the following datasets under the data/input/ directory:
 
 1. Train Data (https://www.kaggle.com/datasets/sampadab17/network-intrusion-detection?resource=download&select=Train_data.csv)
 Save as: dataset1_Train_data.csv
