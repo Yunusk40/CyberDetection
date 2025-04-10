@@ -9,16 +9,16 @@ def main():
 
     # Load data for traditional ML models
     print("Loading data for ML models...")
-    #X_train_ml, X_test_ml, y_train_ml, y_test_ml = get_data_multiclass()
-    X_train_ml, X_test_ml, y_train_ml, y_test_ml = get_data()
+    #X_train_ml, X_test_ml, y_train_ml, y_test_ml = get_data()
+    X_train_ml, X_test_ml, y_train_ml, y_test_ml = get_data_multiclass()
 
     # Train and evaluate traditional ML models
     print("Training ML models...")
-    #train_and_save_model_multiclass(X_train_ml, y_train_ml)
-    train_and_save_models_binary(X_train_ml, y_train_ml)
+    #train_and_save_models_binary(X_train_ml, y_train_ml)
+    train_and_save_model_multiclass(X_train_ml, y_train_ml)
 
     print("Evaluating ML models...")
-    #evaluate_models_multiclass(X_test_ml, y_test_ml)
-    evaluate_models_binary(X_test_ml, y_test_ml)
+    #evaluate_models_binary(X_test_ml, y_test_ml)
+    evaluate_models_multiclass(X_test_ml, y_test_ml)
 if __name__ == "__main__":
     main()
