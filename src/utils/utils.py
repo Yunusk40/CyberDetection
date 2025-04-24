@@ -12,5 +12,3 @@ def get_data_multiclass():
 
     # train_path = 'data/input/dataset3_WebAttacks.csv'
     # return load_and_preprocess_dataset3(train_path)
-
-
