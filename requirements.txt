@@ -1,4 +1,8 @@
-pandas
-numpy
-scikit-learn
+pandas~=2.2.3
+numpy~=2.0.2
+scikit-learn~=1.5.2
 flask
+joblib~=1.4.2
+matplotlib~=3.9.3
+imbalanced-learn~=0.13.0
+tensorflow~=2.18.0
