@@ -1,8 +1,7 @@
-from src.multiclass_classification.evaluate_models_multiclass import evaluate_models_multiclass
-from src.multiclass_classification.train_models_multiclass import train_and_save_model_multiclass
-from src.utils.utils import get_data, get_data_multiclass
-from src.binary_classifikation.train_models_binary import train_and_save_models_binary
-from src.binary_classifikation.evaluate_models_binary import evaluate_models_binary
+from src.evaluation.evaluate_models_multiclass import evaluate_models_multiclass
+from src.evaluation.suricata_evaluation import evaluate_suricata
+from src.train_models.train_models_multiclass import train_and_save_model_multiclass
+from src.utils.utils import get_data_multiclass
 
 
 def main():
@@ -20,5 +19,13 @@ def main():
     print("Evaluating ML models...")
     #evaluate_models_binary(X_test_ml, y_test_ml)
     evaluate_models_multiclass(X_test_ml, y_test_ml)
+
+    print("Evaluating Suricata against ground truth…")
+    evaluate_suricata(
+    eve_path='data/input/eve.json',
+    csv_path='data/input/CIC-IDS2017_flow_data.csv'
+)
+
+
 if __name__ == "__main__":
     main()
