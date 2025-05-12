@@ -1,4 +1,5 @@
 *.csv
 *.pkl
 *.png
+*.h5
 eve.json
