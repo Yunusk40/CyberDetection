@@ -90,7 +90,7 @@ def evaluate_suricata(eve_path: str, csv_path: str):
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(description='Evaluate Suricata results against ground truth')
-    parser.add_argument('--eve', default='data/input/eve.json', help='Pfad zur eve.json aus Suricata')
+    parser.add_argument('--eve', default='data/suricata_logs/eve.json', help='Pfad zur eve.json aus Suricata')
     parser.add_argument('--csv', default='data/input/CIC-IDS2017.csv', help='Pfad zur CSV mit true labels')
     args = parser.parse_args()
     evaluate_suricata(args.eve, args.csv)

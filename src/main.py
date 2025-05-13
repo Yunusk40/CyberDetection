@@ -29,7 +29,7 @@ def main():
 
     print("Evaluating Suricata against ground truth…")
     evaluate_suricata(
-    eve_path='data/input/eve.json',
+    eve_path='data/suricata_logs/eve.json',
     csv_path='data/input/CIC-IDS2017_flow_data.csv'
 )
 
