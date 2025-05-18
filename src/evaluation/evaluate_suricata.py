@@ -2,7 +2,6 @@ import json
 import pandas as pd
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report
 
-
 def load_suricata_events(eve_path):
     """
     Liest die Suricata eve.json Zeile für Zeile ein und gibt einen DataFrame zurück.
