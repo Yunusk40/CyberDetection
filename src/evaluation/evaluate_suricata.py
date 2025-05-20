@@ -1,5 +1,6 @@
 import json
 import pandas as pd
+from matplotlib import pyplot as plt
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, classification_report
 
 def load_suricata_events(eve_path):
@@ -80,16 +81,44 @@ def evaluate_suricata(eve_path: str, csv_path: str):
 
     # Detaillierten Klassifikationsbericht speichern
     report = classification_report(y_true, y_pred, target_names=['Benign', 'Malicious'], output_dict=True, zero_division=0)
-    pd.DataFrame(report).transpose().to_csv('data/output/suricata_classification_report.csv')
+    pd.DataFrame(report).transpose().to_csv('data/output/suricata/suricata_classification_report.csv')
 
     # Gesamtmetriken speichern
-    pd.DataFrame([metrics]).to_csv('data/output/suricata_metrics.csv', index=False)
-    print("Dateien 'suricata_metrics.csv' und 'suricata_classification_report.csv' unter data/output gespeichert.")
+    pd.DataFrame([metrics]).to_csv('data/output/suricata/suricata_metrics.csv', index=False)
+    print("Dateien 'suricata_metrics.csv' und 'suricata_classification_report.csv' unter data/suricata/output gespeichert.")
 
-if __name__ == '__main__':
-    import argparse
-    parser = argparse.ArgumentParser(description='Evaluate Suricata results against ground truth')
-    parser.add_argument('--eve', default='data/suricata_logs/eve.json', help='Pfad zur eve.json aus Suricata')
-    parser.add_argument('--csv', default='data/input/CIC-IDS2017.csv', help='Pfad zur CSV mit true labels')
-    args = parser.parse_args()
-    evaluate_suricata(args.eve, args.csv)
+    def plot_bar_from_classification_report():
+        # Lade den Bericht
+        df_report = pd.read_csv('data/output/suricata/suricata_classification_report.csv', index_col=0)
+
+        # Wähle die Zeile 'weighted avg' oder 'Malicious'
+        row = df_report.loc['weighted avg']  # Alternativ: 'Malicious'
+
+        # Metriken auswählen
+        metrics_to_plot = ['accuracy', 'precision', 'recall', 'f1-score']
+        values = [
+            metrics['Accuracy'],               # aus dem Dictionary mitberechnet
+            row['precision'],
+            row['recall'],
+            row['f1-score']
+        ]
+
+        # Balkendiagramm mit Beschriftung
+        plt.figure(figsize=(8, 5))
+        bars = plt.bar(metrics_to_plot, values, color=['steelblue', 'orange', 'green', 'crimson'])
+        plt.ylim(0, 1)
+        plt.title('Suricata Classification Report (weighted avg)')
+        plt.ylabel('Score')
+        plt.grid(True, axis='y')
+
+        # Werte als Text über die Balken
+        for bar, val in zip(bars, values):
+            plt.text(bar.get_x() + bar.get_width() / 2, bar.get_height() + 0.02,
+                     f"{val:.2f}", ha='center', va='bottom', fontsize=10)
+
+        plt.tight_layout()
+        plt.savefig('data/output/suricata/suricata_bar_chart_from_report.png')
+        plt.close()
+
+        plot_bar_from_classification_report()
+

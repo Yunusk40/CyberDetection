@@ -1,8 +1,8 @@
-from evaluation.evaluate_dl_models_multiclass import evaluate_deep_models
+from evaluation.evaluate_dl_models import evaluate_deep_models
 from evaluation.evaluate_ml_models_binary import evaluate_models_binary
 from src.evaluation.evaluate_ml_models_multiclass import evaluate_models_multiclass
 from src.evaluation.evaluate_suricata import evaluate_suricata
-from src.train_models.train_dl_models_multiclass import train_deep_models
+from src.train_models.train_dl_models import train_deep_models
 from src.train_models.train_ml_models_multiclass import train_and_save_model_multiclass
 from src.utils.utils import get_data_multiclass
 from train_models.train_ml_models_binary import train_and_save_models_binary
@@ -31,9 +31,9 @@ def main():
 
     print("Evaluating Suricata against ground truth…")
     evaluate_suricata(
-    eve_path='data/suricata_logs/eve.json',
-    csv_path='data/input/CIC-IDS2017_flow_data.csv'
-)
+    eve_path='data/input/suricata_logs/eve.json',
+    csv_path='data/input/CIC-IDS/flow_data/Thursday-WorkingHours_flow_data.csv'
+    )
 
 if __name__ == "__main__":
     main()

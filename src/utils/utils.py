@@ -7,8 +7,5 @@ def get_data():
     return load_and_preprocess_dataset1(train_path)
 
 def get_data_multiclass():
-    #train_path = 'data/input/dataset2_UNSW_NB15.csv'
-    #return load_and_preprocess_dataset2(train_path)
-
-    train_path = 'data/input/CIC-IDS2017.csv'
+    train_path = 'data/input/CIC-IDS/Thursday-WorkingHours.csv'
     return load_and_preprocess_dataset3(train_path)
