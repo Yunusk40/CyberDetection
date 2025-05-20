@@ -2,4 +2,6 @@
 *.pkl
 *.png
 *.h5
+*.keras
+*.npy
 eve.json

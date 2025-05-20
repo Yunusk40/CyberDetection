@@ -4,7 +4,7 @@ from sklearn.metrics import accuracy_score, f1_score, recall_score, precision_sc
 import matplotlib.pyplot as plt
 import numpy as np
 
-def evaluate_models_binary(X_test, y_test):
+def evaluate_ml_models_binary(X_test, y_test):
     models = ['Random Forest', 'KNN', 'Decision Tree', 'Logistic Regression', 'Naive Bayes']
     accuracy = []
     precision = []

@@ -9,7 +9,7 @@ import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 
 
-def train_and_save_model_multiclass(X_train, y_train):
+def train_ml_model_multiclass(X_train, y_train):
 
     # Apply SMOTE to balance the training data
     print("Applying SMOTE to balance training data...")

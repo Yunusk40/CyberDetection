@@ -69,19 +69,32 @@ def evaluate_deep_models(X_test, y_test, models_dir='models'):
     df_res.to_csv('data/output/dl/deep_model_metrics.csv', index=False)
     print("Deep Learning Evaluation abgeschlossen. Metriken unter data/output/dl/deep_model_metrics.csv gespeichert.")
 
-    # Balkendiagramm plotten
-    ax = df_res.set_index('Model').plot(kind='bar', figsize=(10, 6))
-    plt.title('Deep Learning Model Performance')
-    plt.ylabel('Score (%)')
-    plt.ylim(0, 100)
-    plt.grid(True, axis='y')
-    # Prozentwerte auf den Balken
-    for p in ax.patches:
-        height = p.get_height()
+    # Balkendiagramm erstellen
+    fig, ax = plt.subplots(figsize=(12, 8))
+    df_plot = df_res.set_index('Model')
+    df_plot.plot(kind='bar', ax=ax, width=0.8)
+
+    ax.set_title('Deep Learning Model Performance')
+    ax.set_ylabel('Score (%)')
+    ax.set_ylim(-10, 100)
+    ax.grid(True, axis='y')
+
+    # Tick-Labels horizontal und lesbar
+    ax.set_xticks(range(len(df_plot)))
+    ax.set_xticklabels(df_plot.index, rotation=0, fontsize=10)
+    ax.tick_params(axis='y', labelsize=10)
+
+    # Prozentwerte unter den Balken
+    for bar in ax.patches:
+        height = bar.get_height()
+        x = bar.get_x() + bar.get_width() / 2
         ax.annotate(f"{height:.1f}%",
-                    xy=(p.get_x() + p.get_width() / 2, height),
-                    xytext=(0, 3),
+                    xy=(x, 0),
+                    xytext=(0, -15),
                     textcoords='offset points',
-                    ha='center', va='bottom', fontsize=9)
+                    ha='center', va='top', fontsize=9)
+
+    plt.subplots_adjust(bottom=0.2)
     plt.tight_layout()
     plt.show()
+

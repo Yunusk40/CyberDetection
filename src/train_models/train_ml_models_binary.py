@@ -7,7 +7,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.naive_bayes import GaussianNB
 
 
-def train_and_save_models_binary(X_train, y_train):
+def train_ml_models_binary(X_train, y_train):
     # Random Forest
     print("Training Random Forest...")
     rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
