@@ -20,15 +20,15 @@ def evaluate_ml_models_multiclass(X_test, y_test):
         predictions = model.predict(X_test)
 
         # Overall metrics
-        acc = accuracy_score(y_test, predictions)
+        acc  = accuracy_score(y_test, predictions)
         prec = precision_score(y_test, predictions, average='weighted', zero_division=0)
-        rec = recall_score(y_test, predictions, average='weighted', zero_division=0)
-        f1 = f1_score(y_test, predictions, average='weighted', zero_division=0)
+        rec  = recall_score(y_test, predictions, average='weighted', zero_division=0)
+        f1   = f1_score(y_test, predictions, average='weighted', zero_division=0)
 
         # Detailed classification report
         report = classification_report(y_test, predictions, output_dict=True, zero_division=0)
         detailed_report = pd.DataFrame(report).transpose()
-        detailed_report.to_csv(f'data/output/{model_name}_classification_report.csv')
+        detailed_report.to_csv(f'data/output/ml/{model_name}_classification_report.csv')
         print(f"Detailed report saved for {model_name}.")
 
         return acc, prec, rec, f1, report
@@ -52,8 +52,8 @@ def evaluate_ml_models_multiclass(X_test, y_test):
 
     # Save overall results
     overall_df = pd.DataFrame(overall_metrics)
-    overall_df.to_csv('data/output/model_metrics.csv', index=False)
-    print("Overall metrics saved in 'data/output/model_metrics.csv'")
+    overall_df.to_csv('data/output/ml/model_metrics.csv', index=False)
+    print("Overall metrics saved in 'data/output/ml/model_metrics.csv'")
 
     # Plot the metrics per model
     plt.figure(figsize=(12, 6))
@@ -87,19 +87,6 @@ def evaluate_ml_models_multiclass(X_test, y_test):
     plt.xticks(index + 1.5 * bar_width, models, rotation=45)
     plt.legend()
     plt.tight_layout()
-    plt.savefig('data/output/overall_metrics_comparison.png')
+    plt.savefig('data/output/ml/overall_metrics_comparison.png')
     plt.show()
 
-    # Create separate bar chart for overall metrics
-    metric_names = ['Accuracy', 'Precision', 'Recall', 'F1-Score']
-    overall_scores = [np.mean(accuracy), np.mean(precision), np.mean(recall), np.mean(f1_scores)]
-
-    plt.figure(figsize=(8, 5))
-    bars = plt.bar(metric_names, overall_scores, color=['blue', 'green', 'orange', 'red'])
-    add_labels(bars)
-
-    plt.title('Overall Metrics (Average Across Models)')
-    plt.ylabel('Score (%)')
-    plt.tight_layout()
-    plt.savefig('data/output/overall_metrics_summary.png')
-    plt.show()

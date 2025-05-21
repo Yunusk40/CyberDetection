@@ -30,8 +30,8 @@ def main():
 
     print("Evaluating Suricata against ground truth…")
     evaluate_suricata(
-    eve_path='data/input/suricata_logs/eve.json',
-    csv_path='data/input/CIC-IDS/flow_data/Thursday-WorkingHours_flow_data.csv'
+    eve_path='data/input/suricata_logs/Wednesday_eve.json',
+    csv_path='data/input/CIC-IDS/flow_data/Wednesday-WorkingHours_flow_data.csv'
     )
 
 if __name__ == "__main__":
