@@ -4,4 +4,4 @@
 *.h5
 *.keras
 *.npy
-eve.json
+*.json
