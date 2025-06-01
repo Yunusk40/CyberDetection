@@ -65,10 +65,10 @@ def evaluate_ml_models_multiclass(X_test, y_test):
     recall = overall_metrics['Recall']
     f1_scores = overall_metrics['F1-Score']
 
-    bars1 = plt.bar(index, accuracy, bar_width, label='Accuracy', color='blue')
-    bars2 = plt.bar(index + bar_width, precision, bar_width, label='Precision', color='green')
-    bars3 = plt.bar(index + 2 * bar_width, recall, bar_width, label='Recall', color='orange')
-    bars4 = plt.bar(index + 3 * bar_width, f1_scores, bar_width, label='F1-Score', color='red')
+    bars1 = plt.bar(index, accuracy, bar_width, label='Accuracy', color='#1f77b4')
+    bars2 = plt.bar(index + bar_width, precision, bar_width, label='Precision', color='#ff7f0e')
+    bars3 = plt.bar(index + 2 * bar_width, recall, bar_width, label='Recall', color='#2ca02c')
+    bars4 = plt.bar(index + 3 * bar_width, f1_scores, bar_width, label='F1-Score', color='#d62728')
 
     # Add percentage labels above the bars
     def add_labels(bars):

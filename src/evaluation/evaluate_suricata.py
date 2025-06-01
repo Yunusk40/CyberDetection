@@ -99,8 +99,16 @@ def evaluate_suricata(eve_path: str, csv_path: str):
         row['f1-score']
     ]
 
+    # **Festlegen der Farben analog zu evaluate_dl_models.py**
+    # Matplotlib-Standardfarbzyklus:
+    #   Accuracy  -> '#1f77b4' (blau)
+    #   Precision -> '#ff7f0e' (orange)
+    #   Recall    -> '#2ca02c' (grün)
+    #   F1-Score  -> '#d62728' (rot)
+    colors = ['#1f77b4', '#ff7f0e', '#2ca02c', '#d62728']
+
     fig, ax = plt.subplots(figsize=(8, 5))
-    bars = ax.bar(metrics_to_plot, values, width=0.6)
+    bars = ax.bar(metrics_to_plot, values, width=0.6, color=colors)
     ax.set_ylim(-0.05, 1.05)
     ax.set_ylabel('Score')
     ax.set_title('Suricata Performance (weighted avg)')
